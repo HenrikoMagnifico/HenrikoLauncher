@@ -43,3 +43,11 @@ before_cache:
 branches:
   except:
     - "/^v\\d+\\.\\d+\\.\\d+$/"
+    
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: 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  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
+  on:
+    branch: main
