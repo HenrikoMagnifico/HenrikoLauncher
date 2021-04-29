@@ -9,6 +9,7 @@ matrix:
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
         - ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true
         - CSC_IDENTITY_AUTO_DISCOVERY=false
+        - GH_TOKEN=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
 
     - os: linux
       services: docker
@@ -16,6 +17,7 @@ matrix:
       node_js: "14"
       env:
         - ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true
+        - GH_TOKEN=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
 
 cache:
   directories:
