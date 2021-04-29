@@ -45,3 +45,9 @@ before_cache:
 branches:
   except:
     - "/^v\\d+\\.\\d+\\.\\d+$/"
+    
+deploy:
+  provider: releases
+  skip_cleanup: true
+  on:
+    tags: true
