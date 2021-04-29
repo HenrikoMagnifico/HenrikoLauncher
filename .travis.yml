@@ -9,7 +9,7 @@ matrix:
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
         - ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true
         - CSC_IDENTITY_AUTO_DISCOVERY=false
-        - GH_TOKEN=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
+        - GH_TOKEN=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
 
     - os: linux
       services: docker
@@ -17,7 +17,7 @@ matrix:
       node_js: "14"
       env:
         - ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true
-        - GH_TOKEN=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
+        - GH_TOKEN=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
 
 cache:
   directories:
@@ -49,7 +49,7 @@ branches:
 deploy:
   provider: releases
   skip_cleanup: true
-  github_token: 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  # Set in the settings page of your repository, as a secure variable
+  github_token: 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  # Set in the settings page of your repository, as a secure variable
   keep_history: true
   on:
     branch: main
