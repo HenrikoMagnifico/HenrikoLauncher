@@ -9,6 +9,7 @@ matrix:
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
         - ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true
         - CSC_IDENTITY_AUTO_DISCOVERY=false
+        - GH_TOKEN=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
 
     - os: linux
       services: docker
@@ -28,6 +29,7 @@ script:
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       ENVS=`env | grep -iE '(DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS|APPVEYOR_|CSC_|_TOKEN|_KEY|AWS_|STRIP|BUILD_)' | sed -n '/^[^\t]/s/=.*//p' | sed '/^$/d' | sed 's/^/-e /g' | tr '\n' ' '`
       docker run $ENVS --rm \
+        -e GH_TOKEN=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 \
         -v ${PWD}:/project \
         -v ~/.cache/electron:/root/.cache/electron \
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
@@ -43,11 +45,3 @@ before_cache:
 branches:
   except:
     - "/^v\\d+\\.\\d+\\.\\d+$/"
-    
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: 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  # Set in the settings page of your repository, as a secure variable
-  keep_history: true
-  on:
-    branch: main
