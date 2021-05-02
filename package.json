@@ -1,10 +1,10 @@
 {
   "name": "henrikolauncher",
-  "version": "v1.0.1",
-  "productName": "HenrikoLauncher",
+  "version": "1.0.1",
+  "productName": "Henriko Launcher",
   "description": "Henriko Modpack Launcher",
   "author": "Created by Henriko Magnifico. Original author is Daniel Scalzi (https://github.com/dscalzi/)",
-  "license": "UNLICENSED",
+  "license": "All Rights Reserved",
   "homepage": "https://www.henrikomagnifico.com/",
   "bugs": {
     "url": "https://www.henrikomagnifico.com/"

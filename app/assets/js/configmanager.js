@@ -56,7 +56,7 @@ exports.getAbsoluteMaxRAM = function(){
 
 function resolveMaxRAM(){
     const mem = os.totalmem()
-    return mem >= 8000000000 ? '4G' : (mem >= 6000000000 ? '3G' : '2G')
+    return mem >= 8000000000 ? '6G' : (mem >= 6000000000 ? '5G' : '4G') //Automatically sets the ram to 6GB if the user has more than ~8GB in their PC. If they have ~6GB or more, set it to 5GB or 4GB.
 }
 
 function resolveMinRAM(){
@@ -86,7 +86,7 @@ const DEFAULT_CONFIG = {
             resWidth: 1280,
             resHeight: 720,
             fullscreen: false,
-            autoConnect: true,
+            autoConnect: false,
             launchDetached: true
         },
         launcher: {
