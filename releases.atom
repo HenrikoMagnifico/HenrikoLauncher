@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
+  <id>tag:github.com,2008:https://github.com/HenrikoMagnifico/HenrikoLauncher/releases</id>
+  <link type="text/html" rel="alternate" href="https://github.com/HenrikoMagnifico/HenrikoLauncher/releases"/>
+  <link type="application/atom+xml" rel="self" href="https://github.com/HenrikoMagnifico/HenrikoLauncher/releases.atom"/>
+  <title>Release notes from Henriko Launcher</title>
+  <updated>2020-09-13T17:42:34Z</updated>
+  <entry>
+    <id>tag:github.com,2008:Repository/118847892/v1.0.1</id>
+    <updated>2021-05-02</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/HenrikoMagnifico/HenrikoLauncher/releases/tag/v1.0.1"/>
+    <title>Release v1.0.1</title>
+    <content type="html">&lt;h2&gt;Release v1.0.1&lt;/h2&gt;
+&lt;p&gt;This update contains various fixes and changes as well as cross-platform support on both Windows, MacOS and Linux.
