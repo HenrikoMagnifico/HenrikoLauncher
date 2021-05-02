@@ -6,7 +6,6 @@
   "author": "Created by Henriko Magnifico. Original author is Daniel Scalzi (https://github.com/dscalzi/)",
   "license": "UNLICENSED",
   "homepage": "https://www.henrikomagnifico.com/",
-  "build": "electron-builder --publish always",
   "bugs": {
     "url": "https://www.henrikomagnifico.com/"
   },
