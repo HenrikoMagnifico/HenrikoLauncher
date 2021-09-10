@@ -210,4 +210,4 @@ The best way to contact the developers is on Discord.
 [nebula]: https://github.com/dscalzi/Nebula 'dscalzi/Nebula'
 [v2branch]: https://github.com/dscalzi/HeliosLauncher/tree/ts-refactor 'v2 branch'
 
-.
+
