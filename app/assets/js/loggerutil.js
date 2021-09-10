@@ -22,7 +22,7 @@ class LoggerUtil {
     }
 
     error(){
-        console.error.apply(null, [this.prefix, this.style, ...arguments])
+        //console.error.apply(null, [this.prefix, this.style, ...arguments])
     }
 
 }

@@ -1,0 +1,19 @@
+{
+  "APP_DISPLAY_NAME": ".HenrikoLauncher",
+
+  "WELCOME_HEADER_TEXT": "Enter the Realm!",
+  "WELCOME_DESC_TEXT": "N/A",
+  "WELCOME_DESC_CTA": "N/A",
+
+  "WEBSITE_ENABLE": true,
+  "WEBSITE_URL": "https://www.henrikomagnifico.com/",
+  "TWITTER_ENABLE": false,
+  "TWITTER_URL": "https://www.henrikomagnifico.com/",
+  "INSTAGRAM_ENABLE": false,
+  "INSTAGRAM_URL": "#",
+  "YOUTUBE_ENABLE": true,
+  "YOUTUBE_URL": "https://www.youtube.com/channel/UCL5FK77d1MCeTtqEQMmmAnw",
+  "DISCORD_ENABLE": true,
+  "DISCORD_URL": "https://discord.gg/zk9Ypke"
+
+}

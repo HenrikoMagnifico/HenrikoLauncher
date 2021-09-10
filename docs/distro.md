@@ -9,22 +9,22 @@ The distribution index is written in JSON. The general format of the index is as
     "version": "1.0.0",
     "discord": {
         "clientId": "12334567890123456789",
-        "smallImageText": "Magnifico Pack",
+        "smallImageText": "WesterosCraft",
         "smallImageKey": "seal-circle"
     },
     "rss": "https://westeroscraft.com/articles/index.rss",
     "servers": [
         {
-            "id": "Magnifico_Pack",
-            "name": "Magnifico Pack",
-            "description": "Magnifico. Play forever.",
-            "icon": "https://yt3.ggpht.com/ytc/AAUvwng3o-5FbBwm2LuwSzP_lfseNdpptC3mKmxxUoTB4w=s900-c-k-c0x00ffffff-no-rj",
-            "version": "1.0.0",
+            "id": "Example_Server",
+            "name": "WesterosCraft Example Client",
+            "description": "Example WesterosCraft server. Connect for fun!",
+            "icon": "http://mc.westeroscraft.com/WesterosCraftLauncher/files/example_icon.png",
+            "version": "0.0.1",
             "address": "mc.westeroscraft.com:1337",
-            "minecraftVersion": "1.16.5",
+            "minecraftVersion": "1.11.2",
             "discord": {
-                "shortId": "Magnifico",
-                "largeImageText": "Magnifico Pack",
+                "shortId": "Example",
+                "largeImageText": "WesterosCraft Example Server",
                 "largeImageKey": "server-example"
             },
             "mainServer": true,
@@ -45,7 +45,7 @@ The distribution index is written in JSON. The general format of the index is as
     "version": "1.0.0",
     "discord": {
         "clientId": "12334567890123456789",
-        "smallImageText": "Magnifico Pack",
+        "smallImageText": "WesterosCraft",
         "smallImageKey": "seal-circle"
     },
     "rss": "https://westeroscraft.com/articles/index.rss",
@@ -142,6 +142,10 @@ Only one server in the array should have the `mainServer` property enabled. This
 ### `Server.autoconnect: boolean`
 
 Whether or not the server can be autoconnected to. If false, the server will not be autoconnected to even when the user has the autoconnect setting enabled.
+
+### `Server.serverCode: string`
+
+A code that allows you to privately distribute certain servers on the launcher. Players will only be able to see the server in their launcher if they have specified the code in the settings. If left blank, all players can see the server.
 
 ### `Server.modules: Module[]`
 

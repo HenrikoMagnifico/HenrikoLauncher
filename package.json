@@ -1,10 +1,10 @@
 {
   "name": "henrikolauncher",
-  "version": "1.0.1",
-  "productName": "Henriko Launcher",
+  "version": "1.0.3-release",
+  "productName": ".HenrikoLauncher",
   "description": "Henriko Modpack Launcher",
-  "author": "Created by Henriko Magnifico. Original author is Daniel Scalzi (https://github.com/dscalzi/)",
-  "license": "All Rights Reserved",
+  "author": "Henriko Magnifico",
+  "license": "Unlicensed",
   "homepage": "https://www.henrikomagnifico.com/",
   "bugs": {
     "url": "https://www.henrikomagnifico.com/"
@@ -26,8 +26,9 @@
   },
   "dependencies": {
     "@electron/remote": "^1.0.4",
-    "adm-zip": "^0.5.3",
+    "adm-zip": "^0.5.4",
     "async": "^3.2.0",
+    "chokidar": "^3.4.3",
     "discord-rpc": "^3.2.0",
     "ejs": "^3.1.6",
     "ejs-electron": "^2.1.1",
@@ -35,16 +36,19 @@
     "fs-extra": "^9.1.0",
     "github-syntax-dark": "^0.5.0",
     "jquery": "^3.6.0",
+    "jquery-mousewheel": "^3.1.13",
+    "mongodb": "^3.6.0",
+    "remarkable": "^2.0.1",
     "request": "^2.88.2",
-    "semver": "^7.3.4",
+    "semver": "^7.3.5",
     "tar-fs": "^2.1.1",
     "winreg": "^1.2.4"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "electron": "^12.0.0",
+    "electron": "^12.0.1",
     "electron-builder": "^22.10.5",
-    "eslint": "^7.21.0"
+    "eslint": "^7.22.0"
   },
   "repository": {
     "type": "git",

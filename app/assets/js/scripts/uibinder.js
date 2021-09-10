@@ -36,7 +36,7 @@ let currentView
  * @param {*} onNextFade Optional. Callback function to execute when the next view
  * fades in.
  */
-function switchView(current, next, currentFadeTime = 500, nextFadeTime = 500, onCurrentFade = () => {}, onNextFade = () => {}){
+function switchView(current, next, currentFadeTime = 250, nextFadeTime = 250, onCurrentFade = () => {}, onNextFade = () => {}){
     currentView = next
     $(`${current}`).fadeOut(currentFadeTime, () => {
         onCurrentFade()
@@ -58,48 +58,79 @@ function getCurrentView(){
 function showMainUI(data){
 
     if(!isDev){
-        loggerAutoUpdater.log('Initializing..')
+        loggerAutoUpdater.log('Initializing...')
         ipcRenderer.send('autoUpdateAction', 'initAutoUpdater', ConfigManager.getAllowPrerelease())
     }
+
+    setTimeout(() => {
+        let loadingImage = document.getElementById('loadCenterImage')
+        loadingImage.setAttribute('inflation', '')
+        $('#loadingContainer').fadeOut(150, () => {
+            loadingImage.removeAttribute('class')
+            loadingImage.removeAttribute('inflation')
+        })
+    }, 0)
 
     prepareSettings(true)
     updateSelectedServer(data.getServer(ConfigManager.getSelectedServer()))
     refreshServerStatus()
+    loadDiscord()
     setTimeout(() => {
-
         document.getElementById('frameBar').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
-        document.body.style.backgroundImage = `url('assets/images/backgrounds/henrikolauncher_background_gif_100q_night.gif')`
-        /*document.body.style.backgroundImage = `url('assets/images/backgrounds/${document.body.getAttribute('bkid')}.jpg')`*/
+        /*
+        randomiseBackground()
+        */
+        //document.body.style.backgroundImage = `url('assets/images/backgrounds/henrikolauncher_background_gif_60q.gif')`
+        if (document.getElementById('server_selection_button').innerHTML == "Magnifico Pack") {
+            document.body.style.backgroundImage = `url('assets/images/backgrounds/henrikolauncher_background_gif_60q_v2.gif')`
+        }
+        else if (document.getElementById('server_selection_button').innerHTML == "Yao Pack") {
+            document.body.style.backgroundImage = `url('assets/images/backgrounds/henrikolauncher_background_gif_100q_night_v2.gif')`
+        }
+        else if (document.getElementById('server_selection_button').innerHTML == "The BitCraft Server (Minecraft 1.16.5)") {
+            document.body.style.backgroundImage = `url('assets/images/backgrounds/7.jpg')`
+        }
+        else if (document.getElementById('server_selection_button').innerHTML == "EnhancedMC") {
+            document.body.style.backgroundImage = `url('assets/images/backgrounds/enhancedmc_screenshot1.jpg')`
+        }
         $('#main').show()
 
         const isLoggedIn = Object.keys(ConfigManager.getAuthAccounts()).length > 0
 
         // If this is enabled in a development environment we'll get ratelimited.
         // The relaunch frequency is usually far too high.
-        if(!isDev && isLoggedIn){
-            validateSelectedAccount()
-        }
+        validateSelectedAccount()
 
         if(ConfigManager.isFirstLaunch()){
             currentView = VIEWS.welcome
-            $(VIEWS.welcome).fadeIn(1000)
+            $(VIEWS.welcome).fadeIn(100)
+            if(hasRPC){
+                DiscordWrapper.updateDetails('Welcome and continue.')
+                DiscordWrapper.updateState('Launcher Setup')
+            }
         } else {
             if(isLoggedIn){
                 currentView = VIEWS.landing
-                $(VIEWS.landing).fadeIn(1000)
+                $(VIEWS.landing).fadeIn(100)
+                if(hasRPC && !ConfigManager.isFirstLaunch()){
+                    if(ConfigManager.getSelectedServer()){
+                        const serv = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
+                        DiscordWrapper.updateDetails('Ready to Play!')
+                        DiscordWrapper.updateState('Server: ' + serv.getName())
+                    } else {
+                        DiscordWrapper.updateDetails('Landing Screen...')
+                    }
+                }
             } else {
                 currentView = VIEWS.login
-                $(VIEWS.login).fadeIn(1000)
+                $(VIEWS.login).fadeIn(100)
+                if(hasRPC){
+                    DiscordWrapper.updateDetails('Adding an Account...')
+                    DiscordWrapper.clearState()
+                }
             }
         }
-
-        setTimeout(() => {
-            $('#loadingContainer').fadeOut(500, () => {
-                $('#loadSpinnerImage').removeClass('rotating')
-            })
-        }, 250)
-        
-    }, 750)
+    }, 250)
     // Disable tabbing to the news container.
     initNews().then(() => {
         $('#newsContainer *').attr('tabindex', '-1')
@@ -108,18 +139,21 @@ function showMainUI(data){
 
 function showFatalStartupError(){
     setTimeout(() => {
-        $('#loadingContainer').fadeOut(250, () => {
+        $('#loadingContainer').fadeOut(150, () => {
             document.getElementById('overlayContainer').style.background = 'none'
             setOverlayContent(
                 'Fatal Error: Unable to Load Distribution Index',
-                'A connection could not be established to our servers to download the distribution index. No local copies were available to load. <br><br>The distribution index is an essential file which provides the latest server information. The launcher is unable to start without it. Ensure you are connected to the internet and relaunch the application.',
-                'Close'
+                'A connection could not be established to our servers to download the distribution index. No local copies were available to load. <br><br>The distribution index is an essential file which provides the latest server information. The launcher is unable to start without it. Ensure you are connected to the internet and relaunch the application. <br><br>It is very possible that the launcher has updated and changed the location for the distribution index file. We would recommend installing the latest version of the launcher from our releases page. <br><br>If you continue to have issues, please contact us on the Henriko Magnifico Discord server.',
+                'Download Latest Version',
+                'Join our Discord'
             )
             setOverlayHandler(() => {
-                const window = remote.getCurrentWindow()
-                window.close()
+                shell.openExternal('https://github.com/HenrikoMagnifico/HenrikoLauncher/releases')
             })
-            toggleOverlay(true)
+            setDismissHandler(() => {
+                shell.openExternal('https://discord.gg/zk9Ypke')
+            })
+            toggleOverlay(true, true)
         })
     }, 750)
 }
@@ -304,17 +338,17 @@ function mergeModConfiguration(o, n, nReq = false){
     return n
 }
 
-function refreshDistributionIndex(remote, onSuccess, onError){
-    if(remote){
-        DistroManager.pullRemote()
-            .then(onSuccess)
-            .catch(onError)
-    } else {
-        DistroManager.pullLocal()
-            .then(onSuccess)
-            .catch(onError)
-    }
-}
+// function refreshDistributionIndex(remote, onSuccess, onError){
+//     if(remote){
+//         DistroManager.pullRemote()
+//             .then(onSuccess)
+//             .catch(onError)
+//     } else {
+//         DistroManager.pullLocal()
+//             .then(onSuccess)
+//             .catch(onError)
+//     }
+// }
 
 async function validateSelectedAccount(){
     const selectedAcc = ConfigManager.getSelectedAccount()
@@ -345,13 +379,17 @@ async function validateSelectedAccount(){
                 }
                 toggleOverlay(false)
                 switchView(getCurrentView(), VIEWS.login)
+                if(hasRPC){
+                    DiscordWrapper.updateDetails('Adding an Account...')
+                    DiscordWrapper.clearState()
+                }
             })
             setDismissHandler(() => {
                 if(accLen > 1){
                     prepareAccountSelectionList()
-                    $('#overlayContent').fadeOut(250, () => {
+                    $('#overlayContent').fadeOut(150, () => {
                         bindOverlayKeys(true, 'accountSelectContent', true)
-                        $('#accountSelectContent').fadeIn(250)
+                        $('#accountSelectContent').fadeIn(150)
                     })
                 } else {
                     const accountsObj = ConfigManager.getAuthAccounts()
@@ -419,3 +457,25 @@ ipcRenderer.on('distributionIndexDone', (event, res) => {
         }
     }
 })
+
+/*
+ipcRenderer.on('cachedDistributionNotification', (event, res) => {
+    if(res) {
+        setTimeout(() => {
+            setOverlayContent(
+                'Warning: Cached Distribution Startup',
+                'We were unable to grab the latest server information from the internet upon startup, so we have used a previously stored version instead.<br><br>This is not recommended, and you should restart your client to fix this to avoid your modpack files being out of date. If you wish to continue using the launcher, you can try again at any time by pressing the refresh button on the landing screen.<br><br>If this continues to occur, and you are not too sure why, come and see us on Discord!',
+                'Understood.',
+                'Join our Discord'
+            )
+            setOverlayHandler(() => {
+                toggleOverlay(false)
+            })
+            setDismissHandler(() => {
+                shell.openExternal('https://discord.gg/zk9Ypke')
+            })
+            toggleOverlay(true, true)
+        }, 2000)
+    }
+})
+*/

@@ -12,6 +12,9 @@ const SHADER_REGEX = /^(.+)\.zip$/
 const SHADER_OPTION = /shaderPack=(.+)/
 const SHADER_DIR = 'shaderpacks'
 const SHADER_CONFIG = 'optionsshaders.txt'
+const OPTIONS_CONFIG = 'options.txt'
+const RESOURCEPACK_OPTION = /resourcePacks:(.+)/
+const RESOURCEPACK_DIR = 'resourcepacks'
 
 /**
  * Validate that the given directory exists. If not, it is
@@ -40,7 +43,7 @@ exports.scanForDropinMods = function(modsDir, version) {
         let verCandidates = []
         const versionDir = path.join(modsDir, version)
         if(fs.existsSync(versionDir)){
-            verCandidates = fs.readdirSync(versionDir)
+            // verCandidates = fs.readdirSync(versionDir)
         }
         for(let file of modCandidates){
             const match = MOD_REGEX.exec(file)
@@ -220,6 +223,99 @@ exports.setEnabledShaderpack = function(instanceDir, pack){
 exports.addShaderpacks = function(files, instanceDir) {
 
     const p = path.join(instanceDir, SHADER_DIR)
+
+    exports.validateDir(p)
+
+    for(let f of files) {
+        if(SHADER_REGEX.exec(f.name) != null) {
+            fs.moveSync(f.path, path.join(p, f.name))
+        }
+    }
+
+}
+
+/**
+ * Scan for resource packs inside the Resource Pack folder.
+ *
+ * @param {string} instanceDir The path to the server instance directory.
+ *
+ * @returns {{fullName: string, name: string}[]}
+ * An array of objects storing metadata about each discovered Resource Pack.
+ */
+exports.scanForResourcePacks = function(instanceDir){
+    const resourcePackDir = path.join(instanceDir, RESOURCEPACK_DIR)
+    const packsDiscovered = [{
+        fullName: 'OFF',
+        name: 'Off (Default)'
+    }]
+    if(fs.existsSync(resourcePackDir)){
+        let modCandidates = fs.readdirSync(resourcePackDir)
+        for(let file of modCandidates){
+            const match = SHADER_REGEX.exec(file)
+            if(match != null){
+                packsDiscovered.push({
+                    fullName: match[0],
+                    name: match[1]
+                })
+            }
+        }
+    }
+    return packsDiscovered
+}
+
+/**
+ * Read the options.txt file to locate the current
+ * enabled pack. If the file does not exist, OFF is returned.
+ *
+ * @param {string} instanceDir The path to the server instance directory.
+ *
+ * @returns {string} The file name of the enabled Resource Pack.
+ */
+exports.getEnabledResourcePack = function(instanceDir){
+    exports.validateDir(instanceDir)
+
+    const options = path.join(instanceDir, OPTIONS_CONFIG)
+    if(fs.existsSync(options)){
+        const buf = fs.readFileSync(options, {encoding: 'utf-8'})
+        const match = RESOURCEPACK_OPTION.exec(buf)
+        if(match != null){
+            return match[1]
+        } else {
+            console.warn('WARNING: Resource Pack regex failed.')
+        }
+    }
+    return 'OFF'
+}
+
+/**
+ * Set the enabled Resource Pack.
+ *
+ * @param {string} instanceDir The path to the server instance directory.
+ * @param {string} pack the file name of the Resource Pack.
+ */
+exports.setEnabledResourcePack = function(instanceDir, pack){
+    exports.validateDir(instanceDir)
+
+    const options = path.join(instanceDir, OPTIONS_CONFIG)
+    let buf
+    if(fs.existsSync(options)){
+        buf = fs.readFileSync(options, {encoding: 'utf-8'})
+        buf = buf.replace(RESOURCEPACK_OPTION, `resourcePacks:["${pack}"]`)
+    } else {
+        buf = `resourcePacks:["${pack}"]`
+    }
+    fs.writeFileSync(options, buf, {encoding: 'utf-8'})
+}
+
+/**
+ * Add Resource Packs.
+ *
+ * @param {FileList} files The files to add.
+ * @param {string} instanceDir The path to the server instance directory.
+ */
+exports.addResourcePacks = function(files, instanceDir) {
+
+    const p = path.join(instanceDir, RESOURCEPACK_DIR)
 
     exports.validateDir(p)
 

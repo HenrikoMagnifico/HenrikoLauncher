@@ -25,6 +25,12 @@ window.eval = global.eval = function () {
     throw new Error('Sorry, this app does not support window.eval().')
 }
 
+// Display warning when devtools window is opened.
+remote.getCurrentWebContents().on('devtools-opened', () => {
+    console.log('%cIf you\'ve been told to paste something here, you\'re being scammed.', 'font-size: 5px')
+    console.log('%cUnless you know exactly what you\'re doing, close this window.', 'font-size: 5px')
+})
+
 // Disable zoom, needed for darwin.
 webFrame.setZoomLevel(0)
 webFrame.setVisualZoomLevelLimits(1, 1)
@@ -35,14 +41,14 @@ if(!isDev){
     ipcRenderer.on('autoUpdateNotification', (event, arg, info) => {
         switch(arg){
             case 'checking-for-update':
-                loggerAutoUpdater.log('Checking for update...')
+                loggerAutoUpdater.log('Checking for update..')
                 settingsUpdateButtonStatus('Checking for Updates..', true)
                 break
             case 'update-available':
                 loggerAutoUpdaterSuccess.log('New update available', info.version)
                 
                 if(process.platform === 'darwin'){
-                    info.darwindownload = `https://github.com/HenrikoMagnifico/HenrikoLauncher/releases/download/v${info.version}/default.henrikolauncher-setup-${info.version}.dmg`
+                    info.darwindownload = `https://github.com/HenrikoMagnifico/HenrikoLauncher/releases/download/v${info.version}/HenrikoLauncher-Launcher-setup-${info.version}.dmg`
                     showUpdateUI(info)
                 }
                 
@@ -115,7 +121,7 @@ function showUpdateUI(info){
             toggleOverlay(false)
         })
         toggleOverlay(true, true)*/
-        switchView(getCurrentView(), VIEWS.settings, 500, 500, () => {
+        switchView(getCurrentView(), VIEWS.settings, 250, 250, () => {
             settingsNavItemListener(document.getElementById('settingsNavUpdate'), false)
         })
     }
@@ -134,7 +140,8 @@ document.addEventListener('readystatechange', function () {
         Array.from(document.getElementsByClassName('fCb')).map((val) => {
             val.addEventListener('click', e => {
                 const window = remote.getCurrentWindow()
-                window.close()
+                //window.close()
+                window.destroy()
             })
         })
 

@@ -16,6 +16,12 @@ const minecraftAgent = {
 }
 const authpath = 'https://authserver.mojang.com'
 const statuses = [
+    // {
+    //     service: 'sessionserver.mojang.com',
+    //     status: 'grey',
+    //     name: 'Multiplayer Session Service',
+    //     essential: true
+    // },
     {
         service: 'session.minecraft.net',
         status: 'grey',
@@ -40,12 +46,12 @@ const statuses = [
         name: 'Public API',
         essential: false
     },
-    {
-        service: 'minecraft.net',
-        status: 'grey',
-        name: 'Minecraft.net',
-        essential: false
-    },
+    // {
+    //     service: 'minecraft.net',
+    //     status: 'grey',
+    //     name: 'Minecraft.net',
+    //     essential: false
+    // },
     {
         service: 'account.mojang.com',
         status: 'grey',
@@ -67,7 +73,7 @@ const statuses = [
 exports.statusToHex = function(status){
     switch(status.toLowerCase()){
         case 'green':
-            return '#04FF5C'
+            return '#4ddd19'
         case 'yellow':
             return '#eac918'
         case 'red':

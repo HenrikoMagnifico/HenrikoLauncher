@@ -7,10 +7,11 @@
             <div id="settingsNavItemsContainer">
                 <div id="settingsNavItemsContent">
                     <button class="settingsNavItem" rSc="settingsTabAccount" id="settingsNavAccount" selected>Account</button>
-                    <button class="settingsNavItem" rSc="settingsTabMinecraft">Minecraft</button>
-                    <button class="settingsNavItem" rSc="settingsTabMods">Mods</button>
-                    <button class="settingsNavItem" rSc="settingsTabJava">Java</button>
                     <button class="settingsNavItem" rSc="settingsTabLauncher">Launcher</button>
+                    <div class="settingsNavSpacer"></div>
+                    <button class="settingsNavItem" rSc="settingsTabMinecraft">Minecraft</button>
+                    <button class="settingsNavItem" rSc="settingsTabMods">Modpack</button>
+                    <button class="settingsNavItem" rSc="settingsTabJava">Java</button>
                     <div class="settingsNavSpacer"></div>
                     <button class="settingsNavItem" rSc="settingsTabAbout">About</button>
                     <button class="settingsNavItem" rSc="settingsTabUpdate" id="settingsNavUpdate">Updates</button>
@@ -30,7 +31,7 @@
             </div>
             <div id="settingsAddAccountContainer">
                 <button id="settingsAddAccount">
-                    <span id="settingsAddAccountText">&#43; Add Account</span>
+                    <span class="settingsAddAccountText">&#43; Add Account</span>
                 </button>
             </div>
             <div id="settingsCurrentAccountsHeader">
@@ -87,15 +88,26 @@
                     </label>
                 </div>
             </div>
+            <div class="settingsFieldContainer">
+                <div class="settingsFieldLeft">
+                    <span class="settingsFieldTitle">Open console on launch</span>
+                    <span class="settingsFieldDesc">This opens the DevTool Console on launch allowing you to view the client log in realtime.</span>
+                </div>
+                <div class="settingsFieldRight">
+                    <label class="toggleSwitch">
+                        <input type="checkbox" cValue="ConsoleOnLaunch">
+                        <span class="toggleSwitchSlider"></span>
+                    </label>
+                </div>
+            </div>
         </div>
         <div id="settingsTabMods" class="settingsTab" style="display: none;">
             <div class="settingsTabHeader">
-                <span class="settingsTabHeaderText">Mod Settings</span>
-                <span class="settingsTabHeaderDesc">Enable or disable mods.</span>
+                <span class="settingsTabHeaderText">Modpack Settings</span>
+                <span class="settingsTabHeaderDesc">Enable or disable mods, and manage other elements of your modpack.</span>
             </div>
             <div id="settingsSelServContainer">
                 <div id="settingsSelServContent">
-
                 </div>
                 <div id="settingsSwitchServerContainer">
                     <div id="settingsSwitchServerContent">
@@ -123,7 +135,7 @@
                         
                     </div>
                 </div>
-                <div id="settingsShadersContainer">
+                <div id="settingsShaderpackContainer">
                     <div class="settingsModsHeader">Shaderpacks</div>
                     <div id="settingsShaderpackDesc">Enable or disable shaders. Please note, shaders will only run smoothly on powerful setups. You may add custom packs here.</div>
                     <div id="settingsShaderpackWrapper">
@@ -131,6 +143,19 @@
                         <div class="settingsSelectContainer">
                             <div class="settingsSelectSelected" id="settingsShadersSelected">Select Shaderpack</div>
                             <div class="settingsSelectOptions" id="settingsShadersOptions" hidden>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="settingsResourcePackContainer">
+                    <div class="settingsModsHeader">Resource Packs</div>
+                    <div id="settingsResourcePackDesc">Enable or disable resource packs. Please note, higher resolution resource packs will only run smoothly on powerful setups, and will require more memory to be allocated. You may add custom packs here.</div>
+                    <div id="settingsResourcePackWrapper">
+                        <button id="settingsResourcePackButton"> + </button>
+                        <div class="settingsSelectContainer">
+                            <div class="settingsSelectSelected" id="settingsResourcePackSelected">Select Resource Pack</div>
+                            <div class="settingsSelectOptions" id="settingsResourcePackOptions" hidden>
 
                             </div>
                         </div>
@@ -167,7 +192,7 @@
                                 <span id="settingsMinRAMLabel" class="settingsMemoryLabel">3G</span>
                             </div>
                         </div>
-                        <div id="settingsMemoryDesc">The recommended minimum RAM is 4 gigabytes. 7GB or higher is recommended for an optimal experience. Setting the minimum and maximum values to the same value may reduce lag.</div>
+                        <div id="settingsMemoryDesc">The recommended minimum RAM is 4GB to 6GB. Setting the minimum and maximum values to the same value may reduce lag. In order to use the memory you have allocated, it must be free and available in your system. Allocating all of your total memory is not recommended.</div>
                     </div>
                     <div id="settingsMemoryContentRight">
                         <div id="settingsMemoryStatus">
@@ -247,6 +272,18 @@
                     </label>
                 </div>
             </div>
+            <div class="settingsFieldContainer">
+                <div class="settingsFieldLeft">
+                    <span class="settingsFieldTitle">Enable Discord Integration</span>
+                    <span class="settingsFieldDesc">This option will allow the launcher to control your presence on Discord. If you close the launcher at any time, this feature will no longer work.</span>
+                </div>
+                <div class="settingsFieldRight">
+                    <label class="toggleSwitch">
+                        <input type="checkbox" cValue="DiscordIntegration">
+                        <span class="toggleSwitchSlider"></span>
+                    </label>
+                </div>
+            </div>
             <div class="settingsFileSelContainer">
                 <div class="settingsFileSelContent">
                     <div class="settingsFieldTitle" id="settingsDataDirTitle">Data Directory</div>
@@ -261,10 +298,24 @@
                             </svg>
                         </div>
                         <input class="settingsFileSelVal" type="text" value="null" cValue="DataDirectory" disabled>
+                        <button class="settingsFolderOpenButton" pathId="DataDirectory">Open</button>
                         <button class="settingsFileSelButton" dialogTitle="Select Data Directory" dialogDirectory="true">Choose Folder</button>
                     </div>
                 </div>
                 <div class="settingsFileSelDesc">All game files and local Java installations will be stored in the data directory.<br>Screenshots and world saves are stored in the instance folder for the corresponding server configuration.</div>
+            </div>
+            <div class="settingsServerCodeContainer">
+                <div class="settingsServerCodesTitle">Your Server Codes</div>
+                <div class="settingsServerCodeContent">
+                    <div class="settingsServerCodeActions">
+                        <input class="settingsInputServerCodeVal" placeholder="Enter Code" type="text">
+                        <button class="settingsInputServerCodeButton" id="settingsAddServerCode">Add Code</button>
+                    </div>
+                </div>
+                <div id="settingsServerCodesListContent">
+
+                </div>
+                <div class="settingsServerCodesDesc">Specify server codes here to grant access to hidden servers that wouldn't be available to all users by default.</div>
             </div>
         </div>
         <div id="settingsTabAbout" class="settingsTab" style="display: none;">
@@ -284,16 +335,15 @@
                             <span id="settingsAboutCurrentVersionTitle">Stable Release</span>
                             <div id="settingsAboutCurrentVersionLine">
                                 <span id="settingsAboutCurrentVersionText">Version </span>
-                                <span id="settingsAboutCurrentVersionValue">0.0.1-alpha.12</span>
+                                <span id="settingsAboutCurrentVersionValue">1.0.3</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="settingsAboutButtons">
-                    <a href="https://github.com/HenrikoMagnifico/HenrikoLauncher/" id="settingsAboutSourceButton" class="settingsAboutButton">Source (GitHub)</a>
-                    <!-- The following must be included in third-party usage. -->
-                    <!-- <a href="https://github.com/dscalzi/HeliosLauncher" id="settingsAboutSourceButton" class="settingsAboutButton">Original Source</a> -->
-                    <a href="https://github.com/HenrikoMagnifico/HenrikoLauncher/issues" id="settingsAboutSupportButton" class="settingsAboutButton">Support</a>
+                    <a href="https://github.com/HenrikoMagnifico/HenrikoLauncher" id="settingsAboutSourceButton" class="settingsAboutButton">Source (GitHub)</a>
+                    <a href="https://github.com/dscalzi/HeliosLauncher" id="settingsAboutSourceButton" class="settingsAboutButton">Original Source</a>
+                    <a href="https://github.com/HenrikoMagnifico/HenrikoLauncher" id="settingsAboutSupportButton" class="settingsAboutButton">Support</a>
                     <a href="#" id="settingsAboutDevToolsButton" class="settingsAboutButton">DevTools Console</a>
                 </div>
             </div>
@@ -308,7 +358,7 @@
                     </div>
                 </div>
                 <div class="settingsChangelogActions">
-                    <a class="settingsChangelogButton settingsAboutButton" href="#"></a>
+                    <a class="settingsChangelogButton settingsAboutButton" href="#">View Release Notes on GitHub</a>
                 </div>
             </div>
         </div>
@@ -328,7 +378,7 @@
                             <span id="settingsUpdateVersionTitle">Stable Release</span>
                             <div id="settingsUpdateVersionLine">
                                 <span id="settingsUpdateVersionText">Version </span>
-                                <span id="settingsUpdateVersionValue">0.0.1-alpha.18</span>
+                                <span id="settingsUpdateVersionValue">1.0.3</span>
                             </div>
                         </div>
                     </div>

@@ -2,7 +2,7 @@
     "version": "1.0.0",
     "discord": {
         "clientId": "385581240906022916",
-        "smallImageText": "Henriko Magnifico Discord",
+        "smallImageText": "WesterosCraft",
         "smallImageKey": "seal-circle"
     },
     "java": {
@@ -11,20 +11,21 @@
     "rss": "https://forum.westeroscraft.com/forum/news.2/index.rss",
     "servers": [
         {
-            "id": "Magnifico Pack",
-            "name": "Magnifico Pack",
-            "description": "Magnifico. Play forever.",
-            "icon": "https://yt3.ggpht.com/ytc/AAUvwng3o-5FbBwm2LuwSzP_lfseNdpptC3mKmxxUoTB4w=s900-c-k-c0x00ffffff-no-rj",
-            "version": "1.4.0",
+            "id": "WesterosCraft-1.11.2",
+            "name": "WesterosCraft Production Server",
+            "description": "Main WesterosCraft server. Connect to enter the Realm.",
+            "icon": "http://mc.westeroscraft.com/WesterosCraftLauncher/files/server-prod.png",
+            "version": "3.9.4",
             "address": "mc.westeroscraft.com",
-            "minecraftVersion": "1.16.5",
+            "minecraftVersion": "1.11.2",
             "discord": {
                 "shortId": "Production",
-                "largeImageText": "Magnifico Pack",
+                "largeImageText": "WesterosCraft Production Server",
                 "largeImageKey": "server-prod"
             },
             "mainServer": true,
-            "autoconnect": false,
+            "serverCode": "",
+            "autoconnect": true,
             "modules": [
                 {
                     "id": "net.minecraftforge:forge:1.11.2-13.20.1.2429",
@@ -438,6 +439,7 @@
                 "largeImageKey": "server-test"
             },
             "mainServer": false,
+            "serverCode": "",
             "autoconnect": true,
             "modules": [
                 {
@@ -852,6 +854,7 @@
                 "largeImageKey": "server-test"
             },
             "mainServer": false,
+            "serverCode": "",
             "autoconnect": true,
             "modules": [
                 {
@@ -1283,6 +1286,7 @@
                 "largeImageKey": "server-test"
             },
             "mainServer": false,
+            "serverCode": "",
             "autoconnect": false,
             "modules": [
                 {
