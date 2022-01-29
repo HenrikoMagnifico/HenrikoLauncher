@@ -197,7 +197,7 @@ The best way to contact the developers is on Discord.
 
 ---
 
-### See you ingame.
+### I hope to see you in-game!
 
 
 [nodejs]: https://nodejs.org/en/ 'Node.js'
