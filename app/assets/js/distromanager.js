@@ -6,7 +6,7 @@ const logger = require('./loggerutil')('%c[DistroManager]', 'color: #a02d2a; fon
 const constants = require('../../config/constants')
 const isDev = require('../../assets/js/isdev')
 
-const distributionURL = isDev ? constants.DEV_DISTRIBUTION_URL : constants.LIVE_DISTRIBUTION_URL
+const distributionURL = constants.LIVE_DISTRIBUTION_URL
 /**
  * Represents the download information
  * for a specific module.

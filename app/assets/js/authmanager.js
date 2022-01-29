@@ -1,11 +1,11 @@
 /**
  * AuthManager
- * 
+ *
  * This module aims to abstract login procedures. Results from Mojang's REST api
  * are retrieved through our Mojang module. These results are processed and stored,
  * if applicable, in the config using the ConfigManager. All login procedures should
  * be made through this module.
- * 
+ *
  * @module authmanager
  */
 // Requirements
@@ -54,12 +54,12 @@ async function validateSelectedMicrosoft() {
             if (MSExpired) {
                 const newAccessToken = await Microsoft.refreshAccessToken(current.microsoft.refresh_token)
                 const newMCAccessToken = await Microsoft.authMinecraft(newAccessToken.access_token)
-                ConfigManager.updateMicrosoftAuthAccount(current.uuid, newMCAccessToken.access_token, newAccessToken.expires_at)
+                ConfigManager.updateMicrosoftAuthAccount(current.uuid, newMCAccessToken.access_token, newAccessToken.access_token, newAccessToken.refresh_token, newAccessToken.expires_at, newMCAccessToken.expires_at)
                 ConfigManager.save()
                 return true
             }
             const newMCAccessToken = await Microsoft.authMinecraft(current.microsoft.access_token)
-            ConfigManager.updateMicrosoftAuthAccount(current.uuid, newMCAccessToken.access_token, current.microsoft.access_token, current.microsoft.expires_at, newMCAccessToken.expires_at)
+            ConfigManager.updateMicrosoftAuthAccount(current.uuid, newMCAccessToken.access_token, current.microsoft.access_token, current.microsoft.refresh_token, current.microsoft.expires_at, newMCAccessToken.expires_at)
             ConfigManager.save()
 
             return true
@@ -161,10 +161,10 @@ exports.addMSAccount = async authCode => {
         const MCProfile = await Microsoft.getMCProfile(MCAccessToken.access_token).catch(err => {})
         if(!MCProfile) {
             return Promise.reject({
-                message: 'The account you are trying to login with has not purchased a copy of Minecraft. You may purchase a copy on <a href="https://minecraft.net/">Minecraft.net</a>.'
+                message: 'The account you are trying to login with has not purchased a copy of Minecraft You may purchase a copy on <a href="https://minecraft.net/">Minecraft.net</a>.'
             })
         }
-        const ret = ConfigManager.addMsAuthAccount(MCProfile.id, MCAccessToken.access_token, MCProfile.name, MCAccessToken.expires_at, accessToken.access_token, accessToken.refresh_token)
+        const ret = ConfigManager.addMsAuthAccount(MCProfile.id, MCAccessToken.access_token, MCProfile.name, MCAccessToken.expires_at, accessToken.access_token, accessToken.refresh_token, accessToken.expires_at)
         ConfigManager.save()
 
         return ret

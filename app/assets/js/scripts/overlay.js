@@ -196,18 +196,6 @@ document.getElementById('serverSelectConfirm').addEventListener('click', () => {
                 document.body.style.backgroundImage = `url('assets/images/backgrounds/enhancedmc_screenshot1.jpg')`
             }
 
-            /*
-            if (document.getElementsById('server_selection_button') == "Magnifico Pack") {
-                document.body.style.backgroundImage = `url('assets/images/backgrounds/henrikolauncher_background_gif_60q.gif')`
-            }
-            else if (document.getElementsById('server_selection_button') == "Yao Pack") {
-                document.body.style.backgroundImage = `url('assets/images/backgrounds/henrikolauncher_background_gif_100q_night.gif')`
-            }
-            else if (document.getElementsById('server_selection_button') == "The BitCraft Server (Minecraft 1.16.5)") {
-                document.body.style.backgroundImage = `url('assets/images/backgrounds/7.jpg')`
-            }
-            */
-
             return
         }
     }
@@ -313,11 +301,7 @@ function populateServerListings() {
                     <div class="serverListingRevision">${serv.getVersion()}</div>
                 </div>
                 <div class="serverListingDescription">${serv.getDescription()}</div>
-                <div class="serverSelectedText">Selected!</div>
-                <div class="serverSelectedText">
-                    <a href="https://drive.google.com/drive/folders/1SFxRd_Y4QW3dWtuHbUkEYmx1GgCWuouE?usp=sharing" class="serverDownloadButton" type="submit">Download Server Builder</a>
-                </div>
-
+<!--                <div class="serverSelectedText">Selected!</div>-->
             </div>
         </button>`
     }
@@ -329,9 +313,9 @@ function populateAccountListings() {
     const accountsObj = ConfigManager.getAuthAccounts()
     const accounts = Array.from(Object.keys(accountsObj), v => accountsObj[v])
     let htmlString = ''
-    for (let i = 0; i < accounts.length; i++) {
-        htmlString += `<button class="accountListing" uuid="${accounts[i].uuid}" ${i === 0 ? 'selected' : ''}>
-            <img src="https://crafatar.com/renders/head/${accounts[i].uuid}?scale=2&default=MHF_Steve&overlay">
+    for(let i=0; i<accounts.length; i++){
+        htmlString += `<button class="accountListing" uuid="${accounts[i].uuid}" ${i===0 ? 'selected' : ''}>
+            <img src="https://mc-heads.net/head/${accounts[i].uuid}/40">
             <div class="accountListingName">${accounts[i].displayName}</div>
         </button>`
     }

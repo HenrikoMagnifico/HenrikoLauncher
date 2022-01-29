@@ -37,7 +37,6 @@ exports.getServerStatus = async function (modpack) {
             },
             function(error, response, body){
                 if(!body || error || response.statusCode !== 200){
-                    logger.warn('Unable to retrieve gameshards!')
                     logger.error(error)
                     reject(error)
                 } else {

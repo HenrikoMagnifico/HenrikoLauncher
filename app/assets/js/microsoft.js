@@ -1,6 +1,7 @@
 // Requirements
-const request = require('request')
 
+const request = require('request')
+//const ejs= require('ejs/ejs')
 // Constants
 const clientId = 'de140eea-429a-4a6b-b67a-30ea6af614f3'
 
@@ -149,14 +150,13 @@ exports.getAccessToken = authCode => {
 exports.refreshAccessToken = refreshToken => {
     return new Promise((resolve, reject) => {
         const expiresAt = new Date()
-        const data = new Object()
 
         const options = {
             method: 'post',
             formData: {
                 client_id: clientId,
                 refresh_token: refreshToken,
-                scope: 'XboxLive.signin',
+                scope: 'XboxLive.signin offline_access',
                 redirect_uri: 'https://login.microsoftonline.com/common/oauth2/nativeclient',
                 grant_type: 'refresh_token'
             }
@@ -164,13 +164,44 @@ exports.refreshAccessToken = refreshToken => {
         requestPromise(tokenUri, options).then(response => {
             const body = JSON.parse(response.body)
             expiresAt.setSeconds(expiresAt.getSeconds() + body.expires_in)
+            const data = new Object()
             data.expires_at = expiresAt
             data.access_token = body.access_token
-
+            data.refresh_token = body.refresh_token
             resolve(data)
         }).catch(error => {
-            reject(error)
+            const errorBody = JSON.parse(error[2].body)
+            switch(errorBody.error) {
+                case 'invalid_grant':
+                    console.log('All tokens are invalid. Going through authcode flow again.')
+                    ipcRenderer.send('openMSALoginWindow', 'open')
+                    ipcRenderer.on('MSALoginWindowReply', ...args => {
+                        const queryMap = args[0]
+                        if (queryMap.has('error')) {
+                            let error = queryMap.get('error')
+                            let errorDesc = queryMap.get('error_description')
+                            if(error === 'access_denied'){
+                                error = 'ERROR'
+                                errorDesc = 'To use our launcher, you must agree to the required permissions, otherwise you can\'t use this launcher with Microsoft accounts. Despite agreeing to the permissions you don\'t give us the possibility to do anything with your account, because all data will always be sent back to you (the launcher).'
+                            }
+                            console.log(error, errorDesc)
+                            return
+                        }
+                        const authCode = queryMap.get('code')
+                        const newAT = this.getAccessToken(authCode)
+                        const data = new Object()
+                        data.expires_at = newAT.expires_at
+                        data.access_token = newAT.access_token
+                        data.refresh_token = newAT.refresh_token
+                        resolve(data)
+                    })
+                    break
+                default:
+                    console.log(error)
+            }
         })
+    }).catch(error => {
+        return
     })
 }
 

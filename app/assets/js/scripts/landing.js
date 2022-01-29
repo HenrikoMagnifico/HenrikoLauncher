@@ -13,7 +13,7 @@ const chokidar                = require('chokidar')
 // Internal Requirements
 const DiscordWrapper          = require('./assets/js/discordwrapper')
 const Mojang                  = require('./assets/js/mojang')
-//const ModRealmsRest           = require('./assets/js/modrealms')
+const ModRealmsRest           = require('./assets/js/modrealms')
 const ProcessBuilder          = require('./assets/js/processbuilder')
 const ServerStatus            = require('./assets/js/serverstatus')
 
@@ -29,7 +29,7 @@ const user_text               = document.getElementById('user_text')
 const loggerLanding = LoggerUtil('%c[Landing]', 'color: #000668; font-weight: bold')
 const loggerAEx = LoggerUtil('%c[AEx]', 'color: #353232; font-weight: bold')
 const loggerLaunchSuite = LoggerUtil('%c[LaunchSuite]', 'color: #000668; font-weight: bold')
-//const loggerMetrics = LoggerUtil('%c[ModRealms Metrics]', 'color: #7289da; font-weight: bold')
+const loggerMetrics = LoggerUtil('%c[ModRealms Metrics]', 'color: #7289da; font-weight: bold')
 
 /* Launch Progress Wrapper Functions */
 
@@ -109,7 +109,7 @@ document.getElementById('launch_button').addEventListener('click', function(e){
             window.toggleDevTools()
         }
 
-        loggerLanding.log('Launching game..')
+        loggerLanding.log('Launching the game..')
         const mcVersion = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer()).getMinecraftVersion()
         const jExe = ConfigManager.getJavaExecutable()
         if(jExe == null){
@@ -161,7 +161,7 @@ document.getElementById('refreshMediaButton').onclick = (e) => {
     DistroManager.pullRemote().then((data) => {
         onDistroRefresh(data)
         showMainUI(data)
-        //refreshModRealmsStatuses()
+        refreshModRealmsStatuses()
         setOverlayContent(
             'Launcher Refreshed!',
             'This is a confirmation letting you know that you have manually refreshed your launcher, your server list is now up to date and should be good to go! If you have any problems please do let us know!',
@@ -169,14 +169,12 @@ document.getElementById('refreshMediaButton').onclick = (e) => {
             'Join our Discord'
         )
     }).catch(err => {
-        /*
         setOverlayContent(
             'Error Refreshing Distribution',
             'We were unable to grab the latest server information from the internet upon startup, so we have used a previously stored version instead.<br><br>This is not recommended, and you should restart your client to fix this to avoid your modpack files being out of date. If you wish to continue using the launcher, you can try again at any time by pressing the refresh button on the landing screen.<br><br>If this continues to occur, and you are not too sure why, come and see us on Discord!<br><br>Error Code:<br>' + err,
             'Understood.',
             'Join our Discord'
         )
-        */
     }).finally(() => {
         setOverlayHandler(() => {
             toggleOverlay(false)
@@ -205,7 +203,7 @@ function updateSelectedAccount(authUser){
             username = authUser.displayName
         }
         if(authUser.uuid != null){
-            document.getElementById('avatarContainer').style.backgroundImage = `url('https://crafatar.com/renders/body/${authUser.uuid}')`
+            document.getElementById('avatarContainer').style.backgroundImage = `url('https://mc-heads.net/body/${authUser.uuid}/right')`
         }
     }
     user_text.innerHTML = username
@@ -304,9 +302,10 @@ const refreshMojangStatuses = async function(){
     document.getElementById('mojang_status_icon').style.color = Mojang.statusToHex(status)
 }
 
-/*
+
+
 const refreshModRealmsStatuses = async function(){
-    loggerLanding.log('Refreshing ModRealms Statuses..')
+    loggerLanding.log('Refreshing Launcher Statuses..')
     let status = 'grey'
     let tooltipServerHTML = ''
     let greenCount = 0
@@ -345,7 +344,8 @@ const refreshModRealmsStatuses = async function(){
         })
     })
 }
-*/
+
+
 
 const refreshServerStatus = async function(fade = false){
     loggerLanding.log('Refreshing Server Status')
@@ -367,10 +367,10 @@ const refreshServerStatus = async function(fade = false){
         loggerLanding.debug(err)
     }
     if(fade){
-        $('#server_status_wrapper').fadeOut(250, () => {
+        $('#server_status_wrapper').fadeOut(150, () => {
             document.getElementById('landingPlayerLabel').innerHTML = pLabel
             document.getElementById('player_count').innerHTML = pVal
-            $('#server_status_wrapper').fadeIn(500)
+            $('#server_status_wrapper').fadeIn(250)
         })
     } else {
         document.getElementById('landingPlayerLabel').innerHTML = pLabel
@@ -391,12 +391,12 @@ function loadDiscord(){
 }
 
 refreshMojangStatuses()
-//refreshModRealmsStatuses()
+refreshModRealmsStatuses()
 // Server Status is refreshed in uibinder.js on distributionIndexDone.
 
 // Set refresh rate to once every 5 minutes.
 let mojangStatusListener = setInterval(() => refreshMojangStatuses(true), 30000)
-//let networkStatusListener = setInterval(() => refreshModRealmsStatuses(true), 30000)
+let networkStatusListener = setInterval(() => refreshModRealmsStatuses(true), 30000)
 let serverStatusListener = setInterval(() => refreshServerStatus(true), 30000)
 
 /**
@@ -823,7 +823,7 @@ function dlAsync(login = true){
                 const gameStateChange = function(data){
                     data = data.trim()
                     if(SERVER_JOINED_REGEX.test(data)){
-                        DiscordWrapper.updateDetails('Exploring the Realm!')
+                        DiscordWrapper.updateDetails('Using Henriko Launcher!')
                         DiscordWrapper.resetTime()
                     }
                 }
@@ -839,7 +839,7 @@ function dlAsync(login = true){
                         shell.showItemInFolder(path)
                         setOverlayContent(
                             'Game Crashed!',
-                            'Uh oh! It looks like your game has just crashed. We have opened up the crash-reports folder so that you can easily share it with our staff team over on Discord. If you have any repeating crashes, we always recommend that you come and see us on <a href="https://discord.gg/tKKeTdc">Discord!</a><br><br>For future reference, your crash report file location is: <br>' + path,
+                            'Uh oh! It looks like your game has just crashed. We have opened up the crash-reports folder so that you can easily share it with our staff team over on Discord. If you have any repeating crashes, we always recommend that you come and see us on <a href="https://modrealms.net/discord">Discord!</a><br><br>For future reference, your crash report file location is: <br>' + path,
                             'Okay, thanks!',
                             'Open Crash Report'
                         )
@@ -857,7 +857,7 @@ function dlAsync(login = true){
                     data = data.trim()
                     if(data.indexOf('Could not find or load main class net.minecraft.launchwrapper.Launch') > -1){
                         loggerLaunchSuite.error('Game launch failed, LaunchWrapper was not downloaded properly.')
-                        showLaunchFailure('Error During Launch', 'The main file, LaunchWrapper, failed to download properly. As a result, the game cannot launch.<br><br>To fix this issue, temporarily turn off your antivirus software and launch the game again.<br><br>If you have time, please <a href="https://github.com/HenrikoMagnifico/HenrikoLauncher/issues">submit an issue</a> and let us know what antivirus software you use. We\'ll contact them and try to straighten things out.')
+                        showLaunchFailure('Error During Launch', 'The main file, LaunchWrapper, failed to download properly. As a result, the game cannot launch.<br><br>To fix this issue, temporarily turn off your antivirus software and launch the game again.<br><br>If you have time, please <a href="https://discord.gg/zk9Ypke">submit an issue</a> and let us know what antivirus software you use. We\'ll contact them and try to straighten things out.')
                         proc.kill(9)
                     }  else if(data.includes('net.minecraftforge.fml.relauncher.FMLSecurityManager$ExitTrappedException')){
                         loggerLaunchSuite.error('Game launch failed before the JVM could open the window!')
@@ -888,7 +888,7 @@ function dlAsync(login = true){
                     proc.stdout.on('data', tempListener)
                     proc.stdout.on('data', gameLaunchErrorListener)
 
-                    setLaunchDetails('Your modpack is now launching...<br>Enjoy!')
+                    setLaunchDetails('Your modpack is now launching...<br>Enjoy the game!')
                     proc.on('close', (code, signal) => {
                         if(hasRPC){
                             const serv = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
@@ -1374,8 +1374,4 @@ function loadNews(){
             })
         })
     })
-}
-
-function parseContent(){
-
 }

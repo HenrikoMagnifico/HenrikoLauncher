@@ -353,7 +353,7 @@ ipcRenderer.on('MSALoginWindowReply', (event, ...args) => {
                 return
             }
             case 'AuthNotFinished': {
-                setOverlayContent('ERROR', 'You have to finish the login process to use Henriko Launcher. The window will close by itself when you have successfully logged in.', 'OK')
+                setOverlayContent('ERROR', 'You have to finish the login process to use ModRealms Launcher. The window will close by itself when you have successfully logged in.', 'OK')
                 setOverlayHandler(() => {
                     toggleOverlay(false)
                     toggleOverlay(false, false, 'msOverlay')
@@ -370,7 +370,7 @@ ipcRenderer.on('MSALoginWindowReply', (event, ...args) => {
         let error = queryMap.get('error')
         let errorDesc = queryMap.get('error_description')
         if(error === 'access_denied'){
-            error = 'ERRPR'
+            error = 'ERROR'
             errorDesc = 'To use our launcher, you must agree to the required permissions, otherwise you can\'t use this launcher with Microsoft accounts.<br><br>Despite agreeing to the permissions you don\'t give us the possibility to do anything with your account, because all data will always be sent back to you (the launcher).'
         }        
         setOverlayContent(error, errorDesc, 'OK')

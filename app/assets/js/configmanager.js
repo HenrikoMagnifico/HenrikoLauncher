@@ -140,7 +140,7 @@ const DEFAULT_CONFIG = {
             resWidth: 1280,
             resHeight: 720,
             fullscreen: false,
-            autoConnect: false,
+            autoConnect: true,
             launchDetached: true,
             consoleOnLaunch: false
         },
@@ -403,7 +403,7 @@ exports.updateMicrosoftAuthAccount = function(uuid, accessToken, msAccessToken, 
     config.authenticationDatabase[uuid].expiresAt = mcExpires
     config.authenticationDatabase[uuid].microsoft.access_token = msAccessToken
     config.authenticationDatabase[uuid].microsoft.refresh_token = msRefreshToken
-    config.authenticationDatabase[uuid].microsoft.expires_at = msRefreshToken
+    config.authenticationDatabase[uuid].microsoft.expires_at = msExpires
     return config.authenticationDatabase[uuid]
 }
 

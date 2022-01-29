@@ -8,8 +8,8 @@ const fs = require('fs')
 const isDev = require('./app/assets/js/isdev')
 const path = require('path')
 const semver = require('semver')
+const settings = require('./app/config/settings.json')
 const url = require('url')
-let settings = require('./app/config/settings.json')
 
 // // Enable live reload for all the files inside your project directory
 if (isDev) {
@@ -19,6 +19,13 @@ if (isDev) {
 app.on('window-all-closed', () => {
     app.quit()
 })
+
+/* Ensure that we export the config to be used by ejse */
+for (let s in settings) {
+    ejse.data(s, settings[s])
+}
+
+ejse.data('APP_DISPLAY_NAME', settings.APP_DISPLAY_NAME)
 
 const redirectUriPrefix = 'https://login.microsoftonline.com/common/oauth2/nativeclient?'
 const clientID = 'de140eea-429a-4a6b-b67a-30ea6af614f3'
@@ -197,19 +204,13 @@ function createWindow() {
             preload: path.join(__dirname, 'app', 'assets', 'js', 'preloader.js'),
             nodeIntegration: true,
             contextIsolation: false,
-            enableRemoteModule: true,
-            worldSafeExecuteJavaScript: true
+            enableRemoteModule: true
         },
         backgroundColor: '#171614'
     })
 
     let backgroundDir = fs.readdirSync(path.join(__dirname, 'app', 'assets', 'images', 'backgrounds'))
     ejse.data('bkid', Array.from(backgroundDir.values())[Math.floor((Math.random() * backgroundDir.length))])
-
-    //load constants into ejs
-    Object.keys(settings).forEach(function (key) {
-        ejse.data(key, settings[key])
-    })
 
     win.loadURL(url.format({
         pathname: path.join(__dirname, 'app', 'app.ejs'),
