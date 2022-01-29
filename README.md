@@ -4,7 +4,7 @@
 
 <em><h5 align="center">(Based on Helios Launcher)</h5></em>
 
-[<img src="https://img.shields.io/github/downloads/HenrikoMagnifico/HenrikoLauncher/total.svg?style=for-the-badge" alt="downloads">](https://travis-ci.com/github/HenrikoMagnifico/HenrikoLauncher)
+<p align="center">[<img src="https://img.shields.io/github/downloads/HenrikoMagnifico/HenrikoLauncher/total.svg?style=for-the-badge" alt="downloads">](https://travis-ci.com/github/HenrikoMagnifico/HenrikoLauncher)
 
 <p align="center">Join modded servers without worrying about installing Java, Forge, or other mods. We'll handle that for you.</p>
 
