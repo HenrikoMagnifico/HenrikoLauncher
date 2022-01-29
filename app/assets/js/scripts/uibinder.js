@@ -140,15 +140,15 @@ function showFatalStartupError(){
             document.getElementById('overlayContainer').style.background = 'none'
             setOverlayContent(
                 'Fatal Error: Unable to Load Distribution Index',
-                'A connection could not be established to our servers to download the distribution index. No local copies were available to load. <br><br>The distribution index is an essential file which provides the latest server information. The launcher is unable to start without it. Ensure you are connected to the internet and relaunch the application. <br><br>It is very possible that the launcher has updated and changed the location for the distribution index file. We would recommend installing the latest version of the launcher from our releases page. <br><br>If you continue to have issues, please contact us on the ModRealms Discord server.',
+                'A connection could not be established to our servers to download the distribution index. No local copies were available to load. <br><br>The distribution index is an essential file which provides the latest server information. The launcher is unable to start without it. Ensure you are connected to the internet and relaunch the application. <br><br>It is very possible that the launcher has updated and changed the location for the distribution index file. We would recommend installing the latest version of the launcher from our releases page. <br><br>If you continue to have issues, please contact me on the Henriko Magnifico Discord server.',
                 'Download Latest Version',
                 'Join our Discord'
             )
             setOverlayHandler(() => {
-                shell.openExternal('https://github.com/ModRealms-Network/HeliosLauncher/releases')
+                shell.openExternal('https://github.com/HenrikoMagnifico/HenrikoLauncher/releases')
             })
             setDismissHandler(() => {
-                shell.openExternal('https://modrealms.net/discord')
+                shell.openExternal('https://discord.gg/zk9Ypke')
             })
             toggleOverlay(true, true)
         })
@@ -468,7 +468,7 @@ ipcRenderer.on('cachedDistributionNotification', (event, res) => {
                 toggleOverlay(false)
             })
             setDismissHandler(() => {
-                shell.openExternal('https://modrealms.net/discord')
+                shell.openExternal('https://discord.gg/zk9Ypke')
             })
             toggleOverlay(true, true)
         }, 2000)

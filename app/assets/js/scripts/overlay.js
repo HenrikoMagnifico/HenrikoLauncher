@@ -301,7 +301,10 @@ function populateServerListings() {
                     <div class="serverListingRevision">${serv.getVersion()}</div>
                 </div>
                 <div class="serverListingDescription">${serv.getDescription()}</div>
-<!--                <div class="serverSelectedText">Selected!</div>-->
+                <div class="serverSelectedText">Selected!</div>
+                <div class="serverSelectedText">
+                    <a href="https://drive.google.com/drive/folders/1SFxRd_Y4QW3dWtuHbUkEYmx1GgCWuouE?usp=sharing" class="serverDownloadButton" type="submit">Download Server Builder</a>
+                </div>
             </div>
         </button>`
     }
