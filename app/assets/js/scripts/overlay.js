@@ -183,16 +183,18 @@ document.getElementById('serverSelectConfirm').addEventListener('click', () => {
             DiscordWrapper.updateDetails('Ready to Play!')
             DiscordWrapper.updateState('Server: ' + serv.getName())
 
-            if (i == 0) {
-                document.body.style.backgroundImage = `url('assets/images/backgrounds/henrikolauncher_background_gif_60q_v2.gif')`
+            if (i == 0) { //If Magnifico Pack
+                document.body.style.backgroundImage = `url('assets/images/backgrounds/henrikolauncher_background_gif_60q.gif')`
+                document.getElementById('modpacklogoimg').src = "assets/images/logos/magnificopack_logo.png"
             }
-            else if (i == 1) {
-                document.body.style.backgroundImage = `url('assets/images/backgrounds/henrikolauncher_background_gif_100q_night_v2.gif')`
+            else if (i == 1) { //If Yao Pack
+                document.body.style.backgroundImage = `url('assets/images/backgrounds/henrikolauncher_background_gif_100q_night.gif')`
+                document.getElementById('modpacklogoimg').src = "assets/images/logos/yaopack_logo.png"
             }
-            else if (i == 2) {
+            else if (i == 2) { //If BitCraft
                 document.body.style.backgroundImage = `url('assets/images/backgrounds/henrikolauncher_background_gif_100q_bitcraft.gif')`
             }
-            else if (i == 3) {
+            else if (i == 3) { //If EnhancedMC
                 document.body.style.backgroundImage = `url('assets/images/backgrounds/enhancedmc_screenshot1.jpg')`
             }
 

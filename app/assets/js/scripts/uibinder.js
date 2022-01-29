@@ -79,10 +79,10 @@ function showMainUI(data){
         document.getElementById('frameBar').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
         //randomiseBackground()
         if (document.getElementById('server_selection_button').innerHTML == "Magnifico Pack") {
-            document.body.style.backgroundImage = `url('assets/images/backgrounds/henrikolauncher_background_gif_60q_v2.gif')`
+            document.body.style.backgroundImage = `url('assets/images/backgrounds/henrikolauncher_background_gif_60q.gif')`
         }
         else if (document.getElementById('server_selection_button').innerHTML == "Yao Pack") {
-            document.body.style.backgroundImage = `url('assets/images/backgrounds/henrikolauncher_background_gif_100q_night_v2.gif')`
+            document.body.style.backgroundImage = `url('assets/images/backgrounds/henrikolauncher_background_gif_100q_night.gif')`
         }
         else if (document.getElementById('server_selection_button').innerHTML == "The BitCraft Server (Minecraft 1.16.5)") {
             document.body.style.backgroundImage = `url('assets/images/backgrounds/7.jpg')`
@@ -90,6 +90,17 @@ function showMainUI(data){
         else if (document.getElementById('server_selection_button').innerHTML == "EnhancedMC") {
             document.body.style.backgroundImage = `url('assets/images/backgrounds/enhancedmc_screenshot1.jpg')`
         }
+
+        // Set the correct modpack logo in the top left corner
+
+        if (document.getElementById('server_selection_button').innerHTML == "Magnifico Pack") {
+            document.getElementById('modpacklogoimg').src = "assets/images/logos/magnificopack_logo.png"
+        }
+        else if (document.getElementById('server_selection_button').innerHTML == "Yao Pack") {
+            document.getElementById('modpacklogoimg').src = "assets/images/logos/yaopack_logo.png"
+        }
+
+
         $('#main').show()
 
         const isLoggedIn = Object.keys(ConfigManager.getAuthAccounts()).length > 0

@@ -51,6 +51,24 @@ body, button {
     background-size: cover;
 }*/
 
+/* Modpack Logos */
+
+#modpacklogo {
+    width: 40%;
+    height: 25%;
+    position: absolute;
+    left: 3%;
+    top: 10%;
+    margin: auto;
+}
+
+
+#modpacklogoimg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 /*******************************************************************************
  *                                                                             *
  * Frame Styles (frame.ejs)                                                    *
@@ -278,7 +296,8 @@ body, button {
     background: rgba(1, 2, 1, 0.2);
     height: 300px;
     width: 300px;
-    box-shadow: 0px 8px 20px -7px rgb(0, 0, 0);
+    /*box-shadow: 0px 8px 20px -7px rgb(0, 0, 0); */
+    backdrop-filter: drop-shadow(8px 20px 20px black);
     margin-bottom: 20px;
 }
 
@@ -3102,7 +3121,7 @@ input:checked + .toggleSwitchSlider:before {
     justify-content: center;
     box-sizing: border-box;
     position: relative;
-    right: 24px;
+    right: 4px;
 }
 
 /* User profile avatar container. */
@@ -3111,8 +3130,8 @@ input:checked + .toggleSwitchSlider:before {
     border: 2px solid #cad7e1;
     box-sizing: border-box;
     background: rgba(1, 2, 1, 0.5);
-    height: 120px;
-    width: 120px;
+    height: 80px;
+    width: 80px;
     box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.53);
     overflow: hidden;
     position: relative;
@@ -3150,13 +3169,13 @@ input:checked + .toggleSwitchSlider:before {
 
 /* User profile name text. */
 #user_text {
-    font-size: 22px;
+    font-size: 24px;
     min-width: 135px;
     font-weight: 900;
     letter-spacing: 1px;
     text-shadow: 0px 0px 20px black;
     position: absolute;
-    right: 145px;
+    right: 105px;
     text-align: right;
     -webkit-user-select: initial;
 }
@@ -3202,15 +3221,15 @@ input:checked + .toggleSwitchSlider:before {
 /* Social media icon shared styles. */
 .mediaSVG {
     fill: #ffffff;
-    height: 50px;
-    width: 80px;
+    height: 42px;
+    width: 64px;
     transition: 0.25s ease;
     cursor: pointer;
 }
 .mediaSVG:hover,
 .mediaURL:focus .mediaSVG,
 .mediaSVG:active {
-    height: 50px;
+    height: 42px;
 }
 
 /* Social media URL shared styles. */
@@ -3304,7 +3323,7 @@ input:checked + .toggleSwitchSlider:before {
 
 /* Style for a general label on the bottom of the landing view. */
 .bot_label {
-    font-size: 24px;
+    font-size: 16px;
     letter-spacing: 1px;
     font-weight: bold;
     text-shadow: 0px 0px 0px #bebcbb;
@@ -3312,7 +3331,7 @@ input:checked + .toggleSwitchSlider:before {
 
 /* Divider used on the bottom of the landing view. */
 .bot_divider_status {
-     height: 45px;
+     height: 32px;
      width: 1px;
      background: rgba(107, 105, 105, 0.7);
      margin-left: 30px;
@@ -3327,7 +3346,7 @@ input:checked + .toggleSwitchSlider:before {
 }
 
 .bot_divider_progress {
-    height: 45px;
+    height: 32px;
     width: 1px;
     background: rgba(107, 105, 105, 0.7);
     margin-left: 70px;
@@ -3600,7 +3619,7 @@ input:checked + .toggleSwitchSlider:before {
 
 /* Arrow image which floats above the news button. */
 #newsButtonSVG {
-    height: 15px;
+    height: 13px;
     margin-left: -2px;
     transition: 0.25s ease;
 }
@@ -3611,7 +3630,7 @@ input:checked + .toggleSwitchSlider:before {
     font-weight: 900;
     letter-spacing: 2px;
     text-shadow: 0px 0px 0px #bebcbb;
-    font-size: 20px;
+    font-size: 16px;
     padding: 10px 0px 3px 0px;
     display: flex;
     transition: 0.25s ease;
@@ -3649,7 +3668,7 @@ input:checked + .toggleSwitchSlider:before {
     font-weight: 900;
     letter-spacing: 6px;
     text-shadow: 0px 0px 0px #bebcbb;
-    font-size: 40px;
+    font-size: 38px;
     padding: 0px;
     transition: 0.25s ease;
     outline: none;
@@ -3699,7 +3718,7 @@ input:checked + .toggleSwitchSlider:before {
 
 /* Button which opens the server selection view. */
 #server_selection_button {
-    font-size: 32px;
+    font-size: 28px;
     background: none;
     border: none;
     border-bottom: 2px #ff0066 double;
@@ -3984,6 +4003,8 @@ input:checked + .toggleSwitchSlider:before {
     transition: 0.25s ease;
     cursor: pointer;
     position: relative;
+    float: center;
+    margin: auto;
     background: rgba(131, 131, 131, 0.25);
 }
 .serverListing[selected] {
