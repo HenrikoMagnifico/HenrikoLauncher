@@ -35,7 +35,7 @@ This is not an exhaustive list. Download and install the launcher to gauge all i
 
 ## Downloads
 
-You can download from [GitHub Releases](https://github.com/dscalzi/HeliosLauncher/releases)
+You can download from [GitHub Releases](https://github.com/HenrikoMagnifico/HenrikoLauncher/releases/)
 
 #### Latest Release
 
@@ -197,7 +197,7 @@ The best way to contact the developers is on Discord.
 
 ---
 
-### See you ingame.
+### I hope to see you in-game!
 
 
 [nodejs]: https://nodejs.org/en/ 'Node.js'
