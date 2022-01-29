@@ -21,7 +21,7 @@ builder.build({
         appId: 'henrikolauncher',
         productName: 'Henriko Launcher',
         artifactName: '${productName}-setup-${version}.${ext}',
-        copyright: 'Copyright © 2021 Henriko Magnifico',
+        copyright: 'Copyright © 2022 Henriko Magnifico',
         directories: {
             buildResources: 'build',
             output: 'dist'
