@@ -4077,7 +4077,6 @@ input:checked + .toggleSwitchSlider:before {
 .serverListingImg {
     margin-right: auto;
     margin-left: auto;
-    border: 1px solid #fff;
     width: 50%;
     margin-top: 10%;
 }
