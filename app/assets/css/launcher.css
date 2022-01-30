@@ -2612,7 +2612,7 @@ input:checked + .toggleSwitchSlider:before {
     top: 25px;
     display: inline-flex;
     line-height: 50px;
-    left: 50px;
+    left: 0px;
 }
 #landingContainer > #lower > #center {
     position: relative;
@@ -3323,7 +3323,7 @@ input:checked + .toggleSwitchSlider:before {
 
 /* Style for a general label on the bottom of the landing view. */
 .bot_label {
-    font-size: 16px;
+    font-size: 24px;
     letter-spacing: 1px;
     font-weight: bold;
     text-shadow: 0px 0px 0px #bebcbb;
@@ -3366,7 +3366,7 @@ input:checked + .toggleSwitchSlider:before {
 /* Span which displays the player count of the selected server. */
 #player_count {
     color: #949494;
-    font-size: 15px;
+    font-size: 25px;
     font-weight: 900;
     text-shadow: 0px 0px 20px #949494;
     margin-left: 10px;
@@ -3676,7 +3676,10 @@ input:checked + .toggleSwitchSlider:before {
 }
 #launch_button:hover,
 #launch_button:focus {
-
+    text-shadow: 0px 0px 3px #bebebe;
+    transition: 0.25s ease;
+    color: #7e97f1;
+    font-weight: 1200;
 }
 #launch_button:active {
 }
@@ -3966,6 +3969,7 @@ input:checked + .toggleSwitchSlider:before {
     overflow-y: hidden;
     overflow-x: auto;
     width: 80vw;
+    justify-content: center;
 }
 #serverSelectListScrollable::-webkit-scrollbar-track {
     display: none;
@@ -4003,8 +4007,8 @@ input:checked + .toggleSwitchSlider:before {
     transition: 0.25s ease;
     cursor: pointer;
     position: relative;
-    float: center;
-    margin: auto;
+    /* float: center; */
+    /* margin: auto; */
     background: rgba(131, 131, 131, 0.25);
 }
 .serverListing[selected] {

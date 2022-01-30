@@ -390,13 +390,13 @@ function loadDiscord(){
     }
 }
 
-refreshMojangStatuses()
-refreshModRealmsStatuses()
+//refreshMojangStatuses()
+//refreshModRealmsStatuses()
 // Server Status is refreshed in uibinder.js on distributionIndexDone.
 
 // Set refresh rate to once every 5 minutes.
-let mojangStatusListener = setInterval(() => refreshMojangStatuses(true), 30000)
-let networkStatusListener = setInterval(() => refreshModRealmsStatuses(true), 30000)
+//let mojangStatusListener = setInterval(() => refreshMojangStatuses(true), 30000)
+//let networkStatusListener = setInterval(() => refreshModRealmsStatuses(true), 30000)
 let serverStatusListener = setInterval(() => refreshServerStatus(true), 30000)
 
 /**
