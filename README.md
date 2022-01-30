@@ -31,7 +31,7 @@ This is not an exhaustive list. Download and install the launcher to gauge all i
 
 #### Need Help? [Check the wiki.][wiki]
 
-#### Like the project? Leave a ⭐ star on the repository!
+#### Like the project? Leave a ⭐ on the repository!
 
 ## Downloads
 
