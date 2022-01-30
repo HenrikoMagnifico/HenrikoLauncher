@@ -56,7 +56,7 @@ If you download from the [Releases](https://github.com/dscalzi/HeliosLauncher/re
 
 ## Console
 
-To open the console, use the following keybind.
+To open the console, use the following keybind:
 
 ```console
 ctrl + shift + i
