@@ -191,7 +191,7 @@ We reserve the right to update these conditions at any time, please check back p
 * [Nebula (Create Distribution.json)][nebula]
 * [v2 Rewrite Branch (WIP)][v2branch]
 
-The best way to contact the developers is on Discord.
+The best way to contact the developer is on Discord;
 
 [![discord](https://discordapp.com/api/guilds/211524927831015424/embed.png?style=banner3)][discord]
 
